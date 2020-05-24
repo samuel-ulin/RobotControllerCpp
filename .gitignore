@@ -32,10 +32,18 @@
 *.app
 
 # Visual studio
-*.dir
+*.dir/
 *.vcxproj*
 *.stamp*
+Release/
+*.sln
 
 # Cmake
 CMakeFiles/
 *.cmake
+
+# Visual code
+.vs/
+
+# Build
+build/
