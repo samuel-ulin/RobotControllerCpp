@@ -47,6 +47,3 @@ CMakeFiles/
 
 # Build
 build/
-
-# Submodules
-third_party/*/
