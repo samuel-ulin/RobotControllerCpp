@@ -30,3 +30,12 @@
 *.exe
 *.out
 *.app
+
+# Visual studio
+*.dir
+*.vcxproj*
+*.stamp*
+
+# Cmake
+CMakeFiles/
+*.cmake
