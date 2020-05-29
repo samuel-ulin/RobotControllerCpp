@@ -5,7 +5,19 @@
 #include <numeric>
 #include <string>
 
+#include "Gui.h"
 #include "Serial.h"
+
+#include "imgui.h"
+#include "imgui_impl_glfw.h"
+#include "imgui_impl_opengl3.h"
+
+#include <GL/glew.h>
+#include <GLFW/glfw3.h>
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1900) && !defined(IMGUI_DISABLE_WIN32_FUNCTIONS)
+#pragma comment(lib, "legacy_stdio_definitions")
+#endif
 
 void serialPerformanceTest(const int samples)
 {
@@ -55,7 +67,22 @@ void serialPerformanceTest(const int samples)
 
 int main(int argc, char **argv)
 {
-    
+    State state{};
+    Gui gui{state};
+    if (!gui.init())
+    {
+        return EXIT_FAILURE;
+    }
 
-    return 0;
+    Input input{state};
+    
+    // Main loop
+    while (!glfwWindowShouldClose(gui.getWindow()))
+    {
+        glfwPollEvents();
+
+        gui.update();
+    }
+
+    return EXIT_SUCCESS;
 }

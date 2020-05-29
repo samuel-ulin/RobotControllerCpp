@@ -8,10 +8,12 @@ set(MAIN_FILES
     Gui.h
     Input.h
     Serial.h
+    State.h
     # Source files
     Gui.cpp
     Input.cpp
     Serial.cpp
+    State.cpp
     # Main
     main.cpp)
 
@@ -30,7 +32,7 @@ target_link_libraries(${PROJECT_NAME}
     imgui
     glfw
     docopt
-    glew_s)
+    libglew_static)
 
 if(MSVC)
     #Set the working directory to the source of the project so developer dont have to
