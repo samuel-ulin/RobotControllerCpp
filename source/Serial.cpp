@@ -4,8 +4,15 @@
 #include <iostream>
 
 Serial::Serial(std::string deviceName, Baudrate rate)
-    : m_rate(rate), m_COMHandle(NULL)
+    : m_rate(rate)
 {
+#ifdef _WIN32
+    m_COMHandle = nullptr;
+#endif
+
+#ifdef __linux__
+    m_serialFile = -1;
+#endif
     auto ports = enumeratePorts();
     auto it = std::find_if(
         ports.begin(), ports.end(), [&deviceName](const auto &s) { return deviceName.compare(s) == 0; });
@@ -170,6 +177,7 @@ size_t Serial::readBytes(char *buffer, size_t len)
 
 bool Serial::waitEvent()
 {
+#ifdef _WIN32
     if (m_COMHandle) {
         DWORD eventMask = 0;
         SetCommMask(m_COMHandle, EV_RXFLAG | EV_ERR);
@@ -177,6 +185,7 @@ bool Serial::waitEvent()
         if (eventMask & EV_RXFLAG)
             return true;
     }
+#endif
     return false;
 }
 

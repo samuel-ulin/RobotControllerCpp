@@ -66,7 +66,7 @@ private:
 #endif
 
 #ifdef __linux__
-    int serialFile;
+    int m_serialFile;
 #endif
 };
 
