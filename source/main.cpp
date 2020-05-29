@@ -72,6 +72,7 @@ int main(int argc, char **argv)
     Gui gui{state};
     if (!gui.init())
     {
+        std::cerr << "Failed to init GUI" << std::endl;
         return EXIT_FAILURE;
     }
 

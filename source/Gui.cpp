@@ -27,8 +27,10 @@ bool Gui::init()
 {
     // Setup window
     glfwSetErrorCallback(glfw_error_callback);
-    if (!glfwInit())
-        return 1;
+    if (!glfwInit()) {
+        std::cerr << "glfwInit" << std::endl;
+        return m_init;
+    }
 
         // Decide GL+GLSL versions
 #if __APPLE__
@@ -49,8 +51,10 @@ bool Gui::init()
 
     // Create window with graphics context
     m_window = glfwCreateWindow(1280, 720, "Dear ImGui GLFW+OpenGL3 example", NULL, NULL);
-    if (m_window == NULL)
-        return 1;
+    if (m_window == NULL) {
+        std::cerr << "glfwCreateWindow" << std::endl;
+        return m_init;
+    }
     glfwMakeContextCurrent(m_window);
     glfwSwapInterval(1);// Enable vsync
 
@@ -58,7 +62,7 @@ bool Gui::init()
     bool err = glewInit() != GLEW_OK;
     if (err) {
         fprintf(stderr, "Failed to initialize OpenGL loader!\n");
-        return 1;
+        return m_init;
     }
 
     // Setup Dear ImGui context
@@ -96,6 +100,8 @@ bool Gui::init()
     m_clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
 
     m_init = true;
+
+    return m_init;
 }
 
 void Gui::update()
