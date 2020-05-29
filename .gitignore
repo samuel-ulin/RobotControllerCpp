@@ -48,3 +48,7 @@ CMakeFiles/
 
 # Build
 build/
+
+# Local scripts
+build.sh
+run.sh
